@@ -136,4 +136,23 @@ public class StudentDAO {
             return false;
         }
     }
+public int getTotalStudents() {
+    String sql = "SELECT COUNT(*) FROM students";
+
+    try (Connection conn = getConnection();
+         PreparedStatement ps = conn.prepareStatement(sql);
+         ResultSet rs = ps.executeQuery()) {
+
+        if (rs.next()) {
+            return rs.getInt(1);
+        }
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+    return 0;
+}
+
+   
 }
